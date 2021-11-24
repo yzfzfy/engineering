@@ -29,6 +29,7 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
+const Myplugin = require('../plugins/myplugin');
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -512,6 +513,7 @@ module.exports = function (webpackEnv) {
             ],
         },
         plugins: [
+            new Myplugin(),
             // Generates an `index.html` file with the <script> injected.
             new HtmlWebpackPlugin(
                 Object.assign(
