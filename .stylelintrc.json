@@ -1,0 +1,11 @@
+{
+    "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+    "plugins": ["stylelint-scss", "stylelint-order"],
+    "rules": {
+        "color-hex-case": "lower",
+        "block-no-empty": true,
+        "font-family-no-duplicate-names": true,
+        "order/properties-order": ["position", "left", "right", "top", "right", "width", "height"]
+    },
+    "ignoreFiles": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.svg", "build/**", "node_modules/**"]
+}

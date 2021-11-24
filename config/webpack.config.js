@@ -19,6 +19,7 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 const paths = require('./paths');
 const modules = require('./modules');
 const getClientEnvironment = require('./env');
@@ -153,11 +154,7 @@ module.exports = function (webpackEnv) {
         mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
         // Stop compilation early in production
         bail: isEnvProduction,
-        devtool: isEnvProduction
-            ? shouldUseSourceMap
-                ? 'source-map'
-                : false
-            : isEnvDevelopment && 'cheap-module-source-map',
+        devtool: isEnvProduction ? (shouldUseSourceMap ? 'source-map' : false) : isEnvDevelopment && 'cheap-module-source-map',
         // These are the "entry points" to our application.
         // This means they will be the "root" imports that are included in JS bundle.
         entry:
@@ -192,15 +189,11 @@ module.exports = function (webpackEnv) {
             pathinfo: isEnvDevelopment,
             // There will be one main bundle, and one file per asynchronous chunk.
             // In development, it does not produce real files.
-            filename: isEnvProduction
-                ? 'static/js/[name].[contenthash:8].js'
-                : isEnvDevelopment && 'static/js/bundle.js',
+            filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : isEnvDevelopment && 'static/js/bundle.js',
             // TODO: remove this when upgrading to webpack 5
             futureEmitAssets: true,
             // There are also additional JS chunk files if you use code splitting.
-            chunkFilename: isEnvProduction
-                ? 'static/js/[name].[contenthash:8].chunk.js'
-                : isEnvDevelopment && 'static/js/[name].chunk.js',
+            chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : isEnvDevelopment && 'static/js/[name].chunk.js',
             // webpack uses `publicPath` to determine where the app is being served from.
             // It requires a trailing slash, or the file assets will get an incorrect path.
             // We inferred the "public path" (such as / or /my-project) from homepage.
@@ -306,9 +299,7 @@ module.exports = function (webpackEnv) {
             // https://github.com/facebook/create-react-app/issues/290
             // `web` extension prefixes have been added for better support
             // for React Native Web.
-            extensions: paths.moduleFileExtensions
-                .map((ext) => `.${ext}`)
-                .filter((ext) => useTypeScript || !ext.includes('ts')),
+            extensions: paths.moduleFileExtensions.map((ext) => `.${ext}`).filter((ext) => useTypeScript || !ext.includes('ts')),
             alias: {
                 // Support React Native Web
                 // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -550,9 +541,7 @@ module.exports = function (webpackEnv) {
             // Inlines the webpack runtime script. This script is too small to warrant
             // a network request.
             // https://github.com/facebook/create-react-app/issues/5358
-            isEnvProduction &&
-                shouldInlineRuntimeChunk &&
-                new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
+            isEnvProduction && shouldInlineRuntimeChunk && new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime-.+[.]js/]),
             // Makes some environment variables available in index.html.
             // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
             // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
@@ -691,6 +680,7 @@ module.exports = function (webpackEnv) {
                         },
                     },
                 }),
+            new StylelintPlugin(),
         ].filter(Boolean),
         // Some libraries import Node modules but don't use them in the browser.
         // Tell webpack to provide empty mocks for them so importing them works.

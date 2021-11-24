@@ -1,5 +1,5 @@
 {
-    "printWidth": 120,
+    "printWidth": 150,
     "trailingComma": "all",
     "tabWidth": 4,
     "requirePragma": false,
@@ -17,6 +17,12 @@
     "overrides": [
         {
             "files": ".prettierrc",
+            "options": {
+                "parser": "json"
+            }
+        },
+        {
+            "files": ".stylelintrc",
             "options": {
                 "parser": "json"
             }

@@ -5,9 +5,9 @@
 -   prettier 格式化代码配置。首先需要安装 prettier 插件。
 
     1. 新建.vscode/setting.json 配置，设置`"prettier.requireConfig": true`来读取项目中.prettier 配置文件而不用受编辑器影响，保持团队内统一配置。
-    2. 项目依赖中也要安装 prettier，在提交代码时格式化，防止未格式化的提交到仓库中
+    2. 项目依赖中也要安装 prettier，在提交代码时格式化，防止未格式化的代码提交到仓库中造成冲突
 
--   eslint 检查代码语法错误。cra 初始化的项目默认安装了 eslint 及而推荐的 eslint 的配置。默认的配置放在了 package.json 的 eslintConfig 字段中。结构为:(eslint 知识，extends 参数的值是配置，包含完整的 eslint 字段，plugins 是一些 rules 的集合，rules 只是 extends 中的一个字段)
+-   eslint 检查代码语法错误。cra 初始化的项目默认安装了 eslint 及推荐的 eslint 的配置。默认的配置放在了 package.json 的 eslintConfig 字段中。结构为:(eslint 知识，extends 参数的值是配置，包含完整的 eslint 字段，plugins 是一些 rules 的集合，rules 只是 extends 中的一个字段)
 
     ```js
     // react项目package.json
@@ -54,3 +54,4 @@
 -   lint-staged 如果编辑器没有格式化好就需要在 git 提交前再次保证 lint lint-staged 会安装`husky`和`lint-staged`包。目的就是为本地 git 增加 hook，在 `pre-commit`hook 时，执行 lint。配置文件也遵守`cosmiconfig`约定
 -   验证 git 提交信息。遵守一些共同的约定。使用`commitlint`和常用的规则集。遵守`cosmiconfig`建立 commit.config.js, 常用`@commitlint/config-angular`。在 git 的`commit-msg`hook 中执行`yarn commitlint --edit $1`对 commit 信息做校验
 -   .editorconfig 这个插件是为了在不同编辑器下保持风格一致。需要不同编辑器下安装各自插件
+-   stylelint 为了 lint 样式文件书写方式的插件。试验后发现该组件需要 vscode 也安装 stylelint 插件才可生效，还需要安装`stylelint-config-prettier`插件以禁用可能会和 prettier 冲突的配置。

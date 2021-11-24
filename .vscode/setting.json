@@ -1,3 +1,14 @@
 {
-    "prettier.requireConfig": true
+    "editor.formatOnSave": true,
+    "prettier.requireConfig": true,
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "stylelint.validate": ["css", "scss", "less"],
+    "[css]": {
+        "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    },
+    "[less]": {
+        "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    }
 }

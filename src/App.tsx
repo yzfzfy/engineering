@@ -1,21 +1,26 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+type Props = {
+    foo: string;
+};
+
+const App: React.FC<Props> = () => {
     // const a = { name: '112' };
+    // console.log(props.foo);
 
     return (
-        <div className="App">
-            <header className="App-header">
+        <div className="app">
+            <header className="app-header">
                 <p>
                     Edit <code>src/App.js</code> and save to reload.
                 </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
+                <a className="app-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
                     Learn React
                 </a>
             </header>
         </div>
     );
-}
+};
 
 export default App;

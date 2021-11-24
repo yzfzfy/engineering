@@ -1,4 +1,6 @@
 {
     "*.js": "eslint --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.css": "stylelint --fix",
+    "*.scss": "stylelint --syntax=scss --fix",
+    "*.{js,md}": "prettier --write"
 }
